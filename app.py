@@ -290,6 +290,21 @@ def index():
     """Home page"""
     return render_template('index.html')
 
+@app.route('/about')
+def about():
+    """About Us page"""
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    """Contact Us page"""
+    return render_template('contact.html')
+
+@app.route('/disclaimer')
+def disclaimer():
+    """Disclaimer page"""
+    return render_template('disclaimer.html')
+
 @app.route('/api/detect', methods=['POST'])
 def detect_theme_api():
     """Theme detection API endpoint"""
@@ -327,4 +342,4 @@ def health_check():
 
 if __name__ == '__main__':
     # Run in development environment
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=8008)
