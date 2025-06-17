@@ -1,0 +1,76 @@
+# Robots.txt for Shopify Theme Detector
+# 控制搜索引擎爬虫的抓取规则
+
+# 允许所有搜索引擎访问
+User-agent: *
+
+# 允许抓取的页面
+Allow: /
+Allow: /about
+Allow: /contact
+Allow: /disclaimer
+
+# 禁止抓取的路径
+# API接口 - 避免搜索引擎频繁调用检测接口
+Disallow: /api/
+Disallow: /api/detect
+
+# 健康检查接口 - 内部使用，无需索引
+Disallow: /health
+
+# 静态资源文件夹（如果存在）
+Disallow: /static/
+Disallow: /assets/
+
+# 临时文件和缓存
+Disallow: /tmp/
+Disallow: /cache/
+
+# 管理后台（如果存在）
+Disallow: /admin/
+Disallow: /dashboard/
+
+# 用户数据和隐私相关
+Disallow: /user/
+Disallow: /profile/
+
+# 测试页面
+Disallow: /test/
+Disallow: /debug/
+
+# 爬取延迟设置（秒）
+# 避免过于频繁的请求影响服务器性能
+Crawl-delay: 1
+
+# 网站地图位置
+Sitemap: /sitemap.xml
+
+# 特定搜索引擎的规则
+# Google
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /health
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /health
+
+# 百度
+User-agent: Baiduspider
+Allow: /
+Disallow: /api/
+Disallow: /health
+Crawl-delay: 2
+
+# 阻止恶意爬虫
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
