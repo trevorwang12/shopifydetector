@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Tag: {{ tag }} - {{ blog_config.title }}</title>
+    <meta name="description" content="View all articles tagged with '{{ tag }}'">
+    <meta name="keywords" content="{{ tag }}, {{ blog_config.meta.keywords }}">
+    <meta name="author" content="{{ blog_config.author }}">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --shopify-green: #00C896;
+            --shopify-dark-green: #108043;
+            --shopify-light-green: #E7F7F4;
+            --shopify-purple: #7B68EE;
+            --shopify-gray: #6B7280;
+            --shopify-light-gray: #F3F4F6;
+            --shopify-dark-gray: #1F2937;
+            --border-radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--shopify-dark-gray);
+            background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--shopify-green);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--shopify-gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--shopify-green);
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--shopify-green);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Tag Header */
+        .tag-header {
+            text-align: center;
+            margin-bottom: 60px;
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .tag-badge {
+            background: var(--shopify-light-green);
+            color: var(--shopify-dark-green);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .tag-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--shopify-dark-gray);
+            margin-bottom: 16px;
+        }
+
+        .tag-description {
+            font-size: 18px;
+            color: var(--shopify-gray);
+        }
+
+        /* Posts Grid */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .post-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-content {
+            padding: 30px;
+        }
+
+        .post-date {
+            color: var(--shopify-gray);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .post-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--shopify-dark-gray);
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .post-title a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        .post-title a:hover {
+            color: var(--shopify-green);
+        }
+
+        .post-excerpt {
+            color: var(--shopify-gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: var(--shopify-light-green);
+            color: var(--shopify-dark-green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .tag:hover {
+            background: var(--shopify-green);
+            color: white;
+        }
+
+        .tag.current {
+            background: var(--shopify-green);
+            color: white;
+        }
+
+        .read-more {
+            color: var(--shopify-green);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s;
+        }
+
+        .read-more:hover {
+            gap: 12px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            color: var(--shopify-light-green);
+            margin-bottom: 20px;
+        }
+
+        .empty-state h2 {
+            font-size: 24px;
+            color: var(--shopify-gray);
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            color: var(--shopify-gray);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--shopify-dark-gray);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 80px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .tag-header {
+                padding: 30px 20px;
+            }
+
+            .tag-title {
+                font-size: 28px;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .post-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">Shopify Theme Detector</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/blog" class="active">Blog</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/disclaimer">Disclaimer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <a href="/blog" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+
+        <div class="tag-header">
+            <div class="tag-badge">{{ tag }}</div>
+            <h1 class="tag-title">Tag: {{ tag }}</h1>
+            <p class="tag-description">Found {{ posts|length }} related articles</p>
+        </div>
+
+        {% if posts %}
+        <div class="posts-grid">
+            {% for post in posts %}
+            <article class="post-card">
+                <div class="post-content">
+                    <div class="post-date">
+                        {{ post.metadata.date.strftime(blog_config.date_format) }}
+                    </div>
+                    <h2 class="post-title">
+                        <a href="{{ post.url }}">{{ post.metadata.title }}</a>
+                    </h2>
+                    <p class="post-excerpt">{{ post.metadata.description }}</p>
+                    
+                    {% if post.metadata.tags %}
+                    <div class="post-tags">
+                        {% for post_tag in post.metadata.tags %}
+                        <a href="/blog/tag/{{ post_tag }}" 
+                           class="tag {% if post_tag == tag %}current{% endif %}">{{ post_tag }}</a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    <a href="{{ post.url }}" class="read-more">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-tags"></i>
+            <h2>No Related Articles</h2>
+            <p>No articles found under the tag "{{ tag }}". Please check other tags or return to the blog homepage.</p>
+        </div>
+        {% endif %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Shopify Theme Detector. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

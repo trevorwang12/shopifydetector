@@ -1,0 +1,14 @@
+{
+  "blog": {
+    "title": "Shopify Theme Detector Blog",
+    "description": "Share technical articles, tips, and industry trends related to Shopify themes",
+    "author": "Shopify Theme Detector Team",
+    "url": "/blog",
+    "posts_per_page": 10,
+    "date_format": "%B %d, %Y",
+    "meta": {
+      "keywords": "Shopify, theme detection, ecommerce, web development, Shopify themes",
+      "og_image": "/static/images/blog-og.jpg"
+    }
+  }
+}

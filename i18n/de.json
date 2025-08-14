@@ -1,0 +1,73 @@
+{
+  "site": {
+    "title": "Shopify Theme Detektor",
+    "description": "Kostenloses Tool zur sofortigen Identifizierung jedes Shopify-Themes"
+  },
+  "nav": {
+    "home": "Startseite",
+    "blog": "Blog",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "disclaimer": "Haftungsausschluss"
+  },
+  "hero": {
+    "title": "Welches Shopify-Theme ist das?",
+    "subtitle": "Entdecken Sie das Theme hinter jedem Shopify-Shop sofort mit unserem kostenlosen Theme-Erkennungstool",
+    "description": "Geben Sie unten eine Shopify-Shop-URL ein und wir identifizieren das verwendete Theme, einschließlich Theme-Name, Version und Entwicklerinformationen."
+  },
+  "detector": {
+    "placeholder": "Shopify-Shop-URL eingeben (z.B. store.myshopify.com)",
+    "button": "Theme Erkennen",
+    "analyzing": "Website wird analysiert..."
+  },
+  "steps": {
+    "title": "Einfacher 3-Schritte-Prozess:",
+    "step1": {
+      "title": "URL Eingeben",
+      "description": "Kopieren und fügen Sie jede Shopify-Shop-URL in das obige Eingabefeld ein. Stellen Sie sicher, dass es eine gültige Website ist.",
+      "example": "Z.B.: store.myshopify.com"
+    },
+    "step2": {
+      "title": "Erkennen Klicken",
+      "description": "Unser Algorithmus analysiert Website-Code, CSS-Dateien und Muster, um das Shopify-Theme zu identifizieren.",
+      "note": "Geschwindigkeit: 2-5 Sekunden"
+    },
+    "step3": {
+      "title": "Ergebnisse Erhalten",
+      "description": "Detaillierte Theme-Informationen anzeigen, einschließlich Name, Entwickler, Version und Vertrauenswert.",
+      "note": "99% Genauigkeitsrate"
+    }
+  },
+  "features": {
+    "title": "Warum Unseren Theme-Detektor Wählen?",
+    "fast": {
+      "title": "Blitzschnell",
+      "description": "Erhalten Sie Ergebnisse in unter 5 Sekunden mit unseren optimierten Erkennungsalgorithmen"
+    },
+    "accurate": {
+      "title": "Hochpräzise",
+      "description": "99% Genauigkeitsrate mit fortschrittlicher Mustererkennung und Theme-Fingerabdruck"
+    },
+    "free": {
+      "title": "Völlig Kostenlos",
+      "description": "Keine Registrierung erforderlich, keine versteckten Kosten, unbegrenzte Theme-Erkennungen"
+    },
+    "comprehensive": {
+      "title": "Umfassend",
+      "description": "Erkennt sowohl kostenlose als auch Premium-Themes mit detaillierten Informationen"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Shopify Theme Detektor. Alle Rechte vorbehalten.",
+    "disclaimer": "Dieses Tool dient nur zu Bildungszwecken und ist nicht mit Shopify Inc. verbunden."
+  },
+  "results": {
+    "success": "Theme Erfolgreich Erkannt!",
+    "theme_name": "Theme-Name",
+    "developer": "Entwickler",
+    "confidence": "Vertrauen",
+    "version": "Version",
+    "store_title": "Shop-Titel",
+    "error": "Fehler beim Erkennen des Themes. Bitte überprüfen Sie die URL und versuchen Sie es erneut."
+  }
+}

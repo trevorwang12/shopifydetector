@@ -1,0 +1,73 @@
+{
+  "site": {
+    "title": "Shopify Theme Detector",
+    "description": "Free tool to identify any Shopify theme instantly"
+  },
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact",
+    "disclaimer": "Disclaimer"
+  },
+  "hero": {
+    "title": "What Shopify Theme Is This?",
+    "subtitle": "Discover the theme behind any Shopify store instantly with our free theme detection tool",
+    "description": "Enter a Shopify store URL below and we'll identify the theme being used, including theme name, version, and developer information."
+  },
+  "detector": {
+    "placeholder": "Enter Shopify store URL (e.g., store.myshopify.com)",
+    "button": "Detect Theme",
+    "analyzing": "Analyzing website..."
+  },
+  "steps": {
+    "title": "Simple 3-Step Process:",
+    "step1": {
+      "title": "Enter Store URL",
+      "description": "Copy and paste any Shopify store URL into the input field above. Ensure it's a valid website.",
+      "example": "Ex: store.myshopify.com"
+    },
+    "step2": {
+      "title": "Click Detect",
+      "description": "Our algorithm analyzes website code, CSS files, and patterns to identify the Shopify theme.",
+      "note": "Speed: 2-5 seconds"
+    },
+    "step3": {
+      "title": "Get Results",
+      "description": "View detailed theme information including name, developer, version, and confidence score.",
+      "note": "99% accuracy rate"
+    }
+  },
+  "features": {
+    "title": "Why Choose Our Theme Detector?",
+    "fast": {
+      "title": "Lightning Fast",
+      "description": "Get results in under 5 seconds with our optimized detection algorithms"
+    },
+    "accurate": {
+      "title": "Highly Accurate",
+      "description": "99% accuracy rate with advanced pattern recognition and theme fingerprinting"
+    },
+    "free": {
+      "title": "Completely Free",
+      "description": "No registration required, no hidden costs, unlimited theme detections"
+    },
+    "comprehensive": {
+      "title": "Comprehensive",
+      "description": "Detects both free and premium themes with detailed information"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Shopify Theme Detector. All rights reserved.",
+    "disclaimer": "This tool is for educational purposes only and is not affiliated with Shopify Inc."
+  },
+  "results": {
+    "success": "Theme Detected Successfully!",
+    "theme_name": "Theme Name",
+    "developer": "Developer",
+    "confidence": "Confidence",
+    "version": "Version",
+    "store_title": "Store Title",
+    "error": "Error detecting theme. Please check the URL and try again."
+  }
+}

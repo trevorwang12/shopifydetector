@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>{{ post.metadata.title }} - {{ blog_config.title }}</title>
+    <meta name="description" content="{{ post.metadata.description }}">
+    <meta name="keywords" content="{% if post.metadata.tags %}{{ post.metadata.tags | join(', ') }}, {% endif %}{{ blog_config.meta.keywords }}">
+    <meta name="author" content="{{ post.metadata.author or blog_config.author }}">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{{ post.metadata.title }}">
+    <meta property="og:description" content="{{ post.metadata.description }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ request.url }}">
+    {% if post.metadata.image %}
+    <meta property="og:image" content="{{ post.metadata.image }}">
+    {% endif %}
+    <meta property="article:author" content="{{ post.metadata.author or blog_config.author }}">
+    <meta property="article:published_time" content="{{ post.metadata.date.isoformat() }}">
+    {% if post.metadata.tags %}
+    {% for tag in post.metadata.tags %}
+    <meta property="article:tag" content="{{ tag }}">
+    {% endfor %}
+    {% endif %}
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --shopify-green: #00C896;
+            --shopify-dark-green: #108043;
+            --shopify-light-green: #E7F7F4;
+            --shopify-purple: #7B68EE;
+            --shopify-gray: #6B7280;
+            --shopify-light-gray: #F3F4F6;
+            --shopify-dark-gray: #1F2937;
+            --border-radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--shopify-dark-gray);
+            background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--shopify-green);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--shopify-gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--shopify-green);
+        }
+
+        /* Article */
+        .article {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .article-main {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 50px;
+            box-shadow: var(--shadow);
+        }
+
+        .article-header {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid var(--shopify-light-gray);
+        }
+
+        .article-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--shopify-dark-gray);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: var(--shopify-gray);
+            font-size: 14px;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .tag {
+            background: var(--shopify-light-green);
+            color: var(--shopify-dark-green);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .tag:hover {
+            background: var(--shopify-green);
+            color: white;
+        }
+
+        /* Article Content */
+        .article-content {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .article-content h1,
+        .article-content h2,
+        .article-content h3,
+        .article-content h4,
+        .article-content h5,
+        .article-content h6 {
+            margin: 40px 0 20px 0;
+            color: var(--shopify-dark-gray);
+            font-weight: 600;
+        }
+
+        .article-content h1 { font-size: 36px; }
+        .article-content h2 { font-size: 30px; }
+        .article-content h3 { font-size: 24px; }
+        .article-content h4 { font-size: 20px; }
+
+        .article-content p {
+            margin-bottom: 20px;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content blockquote {
+            background: var(--shopify-light-gray);
+            border-left: 4px solid var(--shopify-green);
+            padding: 20px 30px;
+            margin: 30px 0;
+            font-style: italic;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .article-content code {
+            background: var(--shopify-light-gray);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 14px;
+        }
+
+        .article-content pre {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .article-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .article-content a {
+            color: var(--shopify-green);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .article-content a:hover {
+            border-bottom-color: var(--shopify-green);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--shopify-dark-gray);
+            margin-bottom: 20px;
+        }
+
+        .related-post {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--shopify-light-gray);
+        }
+
+        .related-post:last-child {
+            border-bottom: none;
+        }
+
+        .related-post-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .related-post-title a {
+            text-decoration: none;
+            color: var(--shopify-dark-gray);
+            transition: color 0.3s;
+        }
+
+        .related-post-title a:hover {
+            color: var(--shopify-green);
+        }
+
+        .related-post-date {
+            font-size: 12px;
+            color: var(--shopify-gray);
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--shopify-green);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--shopify-dark-gray);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 80px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .article {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .article-main {
+                padding: 30px 20px;
+            }
+
+            .article-title {
+                font-size: 28px;
+            }
+
+            .article-content {
+                font-size: 16px;
+            }
+
+            .sidebar-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">Shopify Theme Detector</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/blog" class="active">Blog</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/disclaimer">Disclaimer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <a href="/blog" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+
+        <div class="article">
+            <article class="article-main">
+                <header class="article-header">
+                    <h1 class="article-title">{{ post.metadata.title }}</h1>
+                    <div class="article-meta">
+                        <span>
+                            <i class="fas fa-calendar"></i>
+                            {{ post.metadata.date.strftime(blog_config.date_format) }}
+                        </span>
+                        {% if post.metadata.author %}
+                        <span>
+                            <i class="fas fa-user"></i>
+                            {{ post.metadata.author }}
+                        </span>
+                        {% endif %}
+                    </div>
+                    {% if post.metadata.tags %}
+                    <div class="article-tags">
+                        {% for tag in post.metadata.tags %}
+                        <a href="/blog/tag/{{ tag }}" class="tag">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </header>
+
+                <div class="article-content">
+                    {{ post.html | safe }}
+                </div>
+            </article>
+
+            <aside class="sidebar">
+                {% if related_posts %}
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Related Articles</h3>
+                    {% for related_post in related_posts %}
+                    <div class="related-post">
+                        <div class="related-post-title">
+                            <a href="{{ related_post.url }}">{{ related_post.metadata.title }}</a>
+                        </div>
+                        <div class="related-post-date">
+                            {{ related_post.metadata.date.strftime(blog_config.date_format) }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Share Article</h3>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="https://twitter.com/intent/tweet?text={{ post.metadata.title }}&url={{ request.url }}" 
+                           target="_blank" 
+                           style="color: #1DA1F2; font-size: 20px;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" 
+                           target="_blank" 
+                           style="color: #1877F2; font-size: 20px;">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" 
+                           target="_blank" 
+                           style="color: #0A66C2; font-size: 20px;">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Shopify Theme Detector. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

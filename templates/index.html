@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO Meta Tags -->
-    <title>Shopify Theme Detector - What Shopify Theme is That? | Free Theme Identifier Tool</title>
-    <meta name="description" content="Free Shopify Theme Detector tool to identify any Shopify store's theme. Find out 'What Shopify Theme is That?' instantly. Detect theme names, analyze Shopify websites, and discover themes used by popular stores.">
-    <meta name="keywords" content="Shopify Theme Detector, What Shopify Theme is That, Shopify theme identifier, detect Shopify theme, Shopify theme finder, identify Shopify theme, Shopify store analyzer, theme detection tool">
+    <title>{{ page_title() }}</title>
+    <meta name="description" content="{{ i18n.get_text('site.description') }}">
+    <meta name="keywords" content="Shopify Theme Detector, What Shopify Theme is That, Shopify theme identifier, detect Shopify theme, Shopify theme finder, identify Shopify theme, Shopify store analyzer, theme detection tool, shopify detector, shopify theme checker">
     <meta name="author" content="Shopify Theme Detector">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <link rel="canonical" href="https://shopify-theme-detector.com">
+    <link rel="canonical" href="{{ canonical_url() }}">
+    
+    <!-- Hreflang for multilingual SEO -->
+    {% for lang_code in supported_languages %}
+    <link rel="alternate" hreflang="{{ lang_code }}" href="{{ request.base_url }}">
+    {% endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ request.base_url }}">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Shopify Theme Detector - What Shopify Theme is That?">
-    <meta property="og:description" content="Free tool to detect and identify Shopify themes. Find out what theme any Shopify store is using instantly.">
+    <meta property="og:title" content="{{ i18n.get_text('site.title') }} - {{ i18n.get_text('hero.title') }}">
+    <meta property="og:description" content="{{ i18n.get_text('site.description') }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://shopify-theme-detector.com">
     <meta property="og:image" content="https://shopify-theme-detector.com/og-image.jpg">
@@ -22,484 +28,947 @@
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Shopify Theme Detector - What Shopify Theme is That?">
-    <meta name="twitter:description" content="Free tool to detect and identify Shopify themes. Find out what theme any Shopify store is using instantly.">
+    <meta name="twitter:title" content="{{ i18n.get_text('site.title') }} - {{ i18n.get_text('hero.title') }}">
+    <meta name="twitter:description" content="{{ i18n.get_text('site.description') }}">
     <meta name="twitter:image" content="https://shopify-theme-detector.com/twitter-image.jpg">
     
-    <!-- Additional SEO Meta Tags -->
-    <meta name="theme-color" content="#667eea">
-    <meta name="msapplication-TileColor" content="#667eea">
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "{{ i18n.get_text('site.title') }}",
+      "description": "{{ i18n.get_text('site.description') }}",
+      "url": "{{ canonical_url() }}",
+      "applicationCategory": "WebApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Free Shopify theme detection",
+        "Instant theme identification", 
+        "No registration required",
+        "Multi-language support",
+        "Blog and tutorials"
+      ],
+      "author": {
+        "@type": "Organization",
+        "name": "Shopify Theme Detector Team"
+      },
+      "publisher": {
+        "@type": "Organization", 
+        "name": "Shopify Theme Detector"
+      }
+    }
+    </script>
+    
+    <!-- Website Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "{{ i18n.get_text('site.title') }}",
+      "url": "{{ canonical_url() }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ canonical_url() }}?url={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      },
+      "inLanguage": [
+        {% for lang_code in supported_languages %}
+        "{{ lang_code }}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+    </script>
+    
+    <!-- Fonts - optimized loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <style>
+        :root {
+            --shopify-green: #00C896;
+            --shopify-dark-green: #108043;
+            --shopify-light-green: #E7F7F4;
+            --shopify-purple: #7B68EE;
+            --shopify-gray: #6B7280;
+            --shopify-light-gray: #F3F4F6;
+            --shopify-dark-gray: #1F2937;
+            --border-radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 30px rgba(0, 200, 150, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--shopify-light-green) 0%, #ffffff 100%);
             min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--shopify-dark-gray);
+            line-height: 1.6;
         }
         
-        .main-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .detector-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            max-width: 900px;
-            width: 90%;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
         }
         
         .logo {
-            text-align: center;
-            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--shopify-dark-green);
+            text-decoration: none;
         }
         
         .logo i {
-            font-size: 3.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-            display: inline-block;
-            text-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
-            transition: all 0.3s ease;
+            margin-right: 8px;
+            color: var(--shopify-green);
         }
         
-        .logo i:hover {
-            transform: scale(1.1);
-            filter: drop-shadow(0 6px 12px rgba(102, 126, 234, 0.4));
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
         }
         
-        .logo h1 {
-            color: #333;
-            font-weight: 700;
-            margin-bottom: 10px;
+        .nav-links a {
+            color: var(--shopify-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
         
-        .logo p {
-            color: #666;
-            margin-bottom: 0;
+        .nav-links a:hover {
+            color: var(--shopify-green);
         }
         
-        .input-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-control {
-            border-radius: 10px;
-            border: 2px solid #e9ecef;
-            padding: 15px 20px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
-        
-        .btn-detect {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 10px;
-            padding: 15px 30px;
-            font-size: 16px;
+        .nav-links a.active {
+            color: var(--shopify-dark-green);
             font-weight: 600;
-            color: white;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--shopify-dark-gray);
+            margin-bottom: 0.8rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--shopify-gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .highlight {
+            color: var(--shopify-green);
+            font-weight: 600;
+        }
+        
+        /* Detector Card */
+        .detector-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 3rem;
+            margin-bottom: 4rem;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .detector-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--shopify-dark-gray);
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: var(--shopify-dark-gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-input {
             width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid #E5E7EB;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
             transition: all 0.3s ease;
+            background: #FAFBFC;
         }
         
-        .btn-detect:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        .form-input:focus {
+            outline: none;
+            border-color: var(--shopify-green);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.1);
+        }
+        
+        .detect-btn {
+            width: 100%;
+            background: var(--shopify-green);
             color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
         
-        .btn-detect:disabled {
-            opacity: 0.7;
+        .detect-btn:hover {
+            background: var(--shopify-dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 200, 150, 0.3);
+        }
+        
+        .detect-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
             transform: none;
-            box-shadow: none;
         }
         
+        /* Loading */
         .loading {
             display: none;
             text-align: center;
-            margin: 20px 0;
+            margin: 2rem 0;
         }
         
-        .loading .spinner-border {
-            color: #667eea;
+        .spinner {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            border: 3px solid var(--shopify-light-green);
+            border-top: 3px solid var(--shopify-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 0.8rem;
         }
         
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Results */
         .result-card {
             display: none;
-            margin-top: 30px;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            border-left: 5px solid #667eea;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1.8rem;
+            margin-top: 2rem;
         }
         
         .result-success {
-            border-left-color: #28a745;
+            border-left: 4px solid var(--shopify-green);
         }
         
         .result-error {
-            border-left-color: #dc3545;
-            background: #f8d7da;
+            border-left: 4px solid #EF4444;
         }
         
-        .theme-info {
-            margin-top: 15px;
-        }
-        
-        .theme-info .row {
-            margin-bottom: 10px;
-        }
-        
-        .theme-info .col-4 {
+        .result-title {
+            font-size: 1.25rem;
             font-weight: 600;
-            color: #495057;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .result-success .result-title {
+            color: var(--shopify-dark-green);
+        }
+        
+        .result-error .result-title {
+            color: #EF4444;
+        }
+        
+        .result-info {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .result-label {
+            font-weight: 500;
+            color: var(--shopify-gray);
+        }
+        
+        .result-value {
+            color: var(--shopify-dark-gray);
         }
         
         .confidence-bar {
+            background: #E5E7EB;
             height: 8px;
-            background: #e9ecef;
             border-radius: 4px;
             overflow: hidden;
-            margin-top: 5px;
+            margin-top: 0.5rem;
         }
         
         .confidence-fill {
             height: 100%;
-            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+            background: linear-gradient(90deg, var(--shopify-green), var(--shopify-dark-green));
             transition: width 0.5s ease;
         }
         
-        .examples {
-            margin-top: 30px;
+        /* Examples */
+        .examples-section {
             text-align: center;
+            margin-bottom: 4rem;
         }
         
-        .examples h6 {
-            color: #666;
-            margin-bottom: 15px;
+        .examples-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--shopify-dark-gray);
+            margin-bottom: 0.8rem;
         }
         
-        .example-link {
-            display: inline-block;
-            margin: 5px 10px;
-            padding: 8px 15px;
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 14px;
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .example-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            cursor: pointer;
             transition: all 0.3s ease;
-        }
-        
-        .example-link:hover {
-            background: rgba(102, 126, 234, 0.2);
-            color: #667eea;
             text-decoration: none;
+            color: inherit;
         }
         
-        .footer {
+        .example-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .example-logo {
+            width: 3rem;
+            height: 3rem;
+            background: var(--shopify-light-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--shopify-green);
+        }
+        
+        .example-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .example-url {
+            font-size: 0.9rem;
+            color: var(--shopify-gray);
+        }
+        
+        /* Features */
+        .features-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 3rem;
+            margin-bottom: 4rem;
+        }
+        
+        .features-title {
+            font-size: 2rem;
+            font-weight: 600;
             text-align: center;
-            margin-top: 30px;
-            color: #666;
-            font-size: 14px;
+            margin-bottom: 2rem;
+            color: var(--shopify-dark-gray);
         }
         
-        /* Responsive Design */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+        }
+        
+        .feature-icon {
+            width: 4rem;
+            height: 4rem;
+            background: var(--shopify-light-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--shopify-green);
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--shopify-dark-gray);
+        }
+        
+        .feature-description {
+            color: var(--shopify-gray);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--shopify-dark-gray);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .lang-dropdown {
+            position: relative;
+            background: var(--shopify-green);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .lang-dropdown:hover {
+            background: var(--shopify-dark-green);
+        }
+        
+        .lang-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            min-width: 150px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            border: 1px solid #E5E7EB;
+        }
+        
+        .lang-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .lang-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1rem;
+            color: var(--shopify-dark-gray);
+            text-decoration: none;
+            transition: background 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .lang-menu a:hover {
+            background: var(--shopify-light-green);
+        }
+        
+        .lang-menu a.active {
+            background: var(--shopify-light-green);
+            color: var(--shopify-dark-green);
+            font-weight: 600;
+        }
+        
+        /* Responsive */
+        /* Step cards uniform styling */
+        .step-card {
+            height: 400px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            overflow: hidden !important;
+            justify-content: space-between !important;
+        }
+        
+        @media (max-width: 1024px) {
+            /* For tablets and smaller screens, make steps stack vertically */
+            .step-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+            
+            .step-card {
+                height: auto !important;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .detector-card {
-                padding: 30px 20px;
-                margin: 10px;
-                width: 95%;
-                max-width: 100%;
-            }
-            
-            .logo h1 {
-                font-size: 1.8rem;
-            }
-            
-            .logo p {
-                font-size: 0.9rem;
+            .hero-title {
+                font-size: 2.5rem;
             }
             
             .nav-links {
-                flex-wrap: wrap;
-                gap: 10px;
-                justify-content: center;
+                display: none;
             }
             
-            .nav-links a {
-                padding: 8px 15px;
-                font-size: 0.9rem;
+            .detector-card {
+                padding: 2rem 1.5rem;
             }
             
-            .form-control {
-                font-size: 16px; /* Prevents zoom on iOS */
+            .result-info {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
             }
             
-            .btn-detect {
-                width: 100%;
-                margin-top: 15px;
+            /* For mobile, adjust step card padding */
+            .step-card {
+                padding: 1.5rem !important;
             }
             
-            .result-card {
-                padding: 20px;
+            /* Mobile language switcher optimization */
+            .language-switcher {
+                font-size: 0.8rem;
             }
             
-            .theme-info h3 {
-                font-size: 1.3rem;
+            .lang-menu {
+                min-width: 120px;
+                right: -10px;
             }
         }
         
-        @media (max-width: 480px) {
-            .logo h1 {
-                font-size: 1.5rem;
-            }
-            
-            .detector-card {
-                padding: 20px 15px;
-                margin: 5px;
-                width: 98%;
-                max-width: 100%;
-            }
-            
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 8px;
-            }
-            
-            .input-group {
-                margin-bottom: 15px;
-            }
-            
-            .example-links {
-                flex-direction: column;
-                gap: 8px;
-            }
-            
-            .example-links a {
-                font-size: 0.8rem;
-                padding: 8px 12px;
+        /* Performance optimizations */
+        .motion-reduce {
+            transition: none !important;
+            animation: none !important;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
-    
-    /* 导航菜单样式 */
-    .nav {
-        margin: 30px 0;
-        text-align: center;
-    }
-    
-    .nav-links {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        flex-wrap: wrap;
-    }
-    
-    .nav-links li {
-        margin: 0;
-    }
-    
-    .nav-links a {
-        color: #333;
-        text-decoration: none;
-        font-weight: 500;
-        padding: 10px 20px;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-        background: rgba(102, 126, 234, 0.1);
-        border: 2px solid rgba(102, 126, 234, 0.2);
-        display: inline-block;
-    }
-    
-    .nav-links a:hover {
-        background: rgba(102, 126, 234, 0.2);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        color: #333;
-    }
-    
-    .nav-links a.active {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border-color: transparent;
-        font-weight: 600;
-    }
+        
+        /* Improve font loading performance */
+        .hero-title, .feature-title, .nav-links {
+            font-display: swap;
+        }
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <div class="detector-card">
-            <!-- Logo和标题 -->
-            <div class="logo">
-                <i class="fas fa-search"></i>
-                <h1>Shopify Theme Detector - What Shopify Theme is That?</h1>
-                <p>Free tool to identify and detect Shopify themes instantly. Enter any Shopify store URL to discover what theme they're using.</p>
-            </div>
-            
-            <!-- 导航菜单 -->
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
             <nav class="nav">
-                <ul class="nav-links">
-                    <li><a href="/" class="active">Home</a></li>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/contact">Contact Us</a></li>
-                    <li><a href="/disclaimer">Disclaimer</a></li>
-                </ul>
+                <a href="/" class="logo">
+                    <i class="fas fa-search"></i>
+                    {{ i18n.get_text('site.title') }}
+                </a>
+                <div style="display: flex; align-items: center; gap: 2rem;">
+                    <ul class="nav-links">
+                        <li><a href="/" class="active">{{ i18n.get_text('nav.home') }}</a></li>
+                        <li><a href="/blog">{{ i18n.get_text('nav.blog') }}</a></li>
+                        <li><a href="/about">{{ i18n.get_text('nav.about') }}</a></li>
+                        <li><a href="/contact">{{ i18n.get_text('nav.contact') }}</a></li>
+                        <li><a href="/disclaimer">{{ i18n.get_text('nav.disclaimer') }}</a></li>
+                    </ul>
+                    <!-- Language Switcher -->
+                    <div class="language-switcher">
+                        <button class="lang-dropdown" onclick="toggleLangMenu()">
+                            <i class="fas fa-globe"></i>
+                            {{ get_language_name(current_language) }}
+                            <i class="fas fa-chevron-down" style="font-size: 0.8rem;"></i>
+                        </button>
+                        <div class="lang-menu" id="langMenu">
+                            {% for lang_code in supported_languages %}
+                            <a href="/set_language/{{ lang_code }}" {% if lang_code == current_language %}class="active"{% endif %}>
+                                <span>{{ get_language_name(lang_code) }}</span>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </nav>
-            
-            <!-- 输入表单 -->
-            <form id="detectorForm">
-                <div class="input-group">
-                    <input type="url" 
-                           class="form-control" 
-                           id="urlInput" 
-                           placeholder="Enter Shopify website URL, e.g.: https://example.myshopify.com"
-                           required>
-                </div>
-                <button type="submit" class="btn btn-detect" id="detectBtn">
-                    <i class="fas fa-search me-2"></i>
-                    Detect Theme
-                </button>
-            </form>
-            
-            <!-- 加载状态 -->
-            <div class="loading" id="loading">
-                <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Detecting...</span>
-                </div>
-                <p class="mt-2 mb-0">Analyzing website, please wait...</p>
-            </div>
-            
-            <!-- 结果显示 -->
-            <div class="result-card" id="resultCard">
-                <div id="resultContent"></div>
-            </div>
-            
-            <!-- 示例网站 -->
-            <div class="examples">
-                <h2 style="font-size: 1rem; font-weight: 600; margin-bottom: 15px;">Popular Shopify Stores - Test Our Theme Detector:</h2>
-                <a href="#" class="example-link" data-url="https://www.allbirds.com">Allbirds</a>
-                <a href="#" class="example-link" data-url="https://www.gymshark.com">Gymshark</a>
-                <a href="#" class="example-link" data-url="https://www.colourpop.com">ColourPop</a>
-            </div>
-            
-            <!-- SEO Content Section -->
-            <div class="seo-content" style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 15px; font-size: 0.9rem; line-height: 1.6;">
-                <h2 style="font-size: 1.2rem; margin-bottom: 15px; color: #333;">How Does Our Shopify Theme Detector Work?</h2>
-                <p>Our Shopify Theme Detector analyzes the source code of any Shopify store to identify the theme being used. Simply enter a Shopify website URL, and our tool will scan for theme signatures, CSS patterns, and JavaScript files to determine "What Shopify Theme is That?"</p>
-                
-                <h3 style="font-size: 1.1rem; margin: 20px 0 10px 0; color: #333;">Why Use Our Theme Detection Tool?</h3>
-                <ul style="margin: 10px 0; padding-left: 20px;">
-                    <li>Free and unlimited Shopify theme detection</li>
-                    <li>Instant results - no registration required</li>
-                    <li>Accurate theme identification for most Shopify stores</li>
-                    <li>Perfect for finding inspiration for your own store</li>
-                </ul>
-                
-                <h3 style="font-size: 1.1rem; margin: 20px 0 10px 0; color: #333;">Frequently Asked Questions</h3>
-                <div style="margin: 15px 0;">
-                    <strong>Q: Can this tool detect any Shopify theme?</strong><br>
-                    A: Our Shopify Theme Detector can identify most popular themes and many custom themes by analyzing their unique code signatures.
-                </div>
-                <div style="margin: 15px 0;">
-                    <strong>Q: Is this Shopify theme identifier free to use?</strong><br>
-                    A: Yes, our "What Shopify Theme is That?" tool is completely free with no limitations.
-                </div>
-            </div>
-            
-            <!-- 页脚 -->
-            <div class="footer">
-                <p>© 2025 Shopify Theme Detector - The best free tool to answer "What Shopify Theme is That?" </p>
-            </div>
         </div>
-    </div>
-    
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Shopify Theme Detector",
-        "description": "Free tool to detect and identify Shopify themes. Find out what theme any Shopify store is using instantly.",
-        "url": "https://shopify-theme-detector.com",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "creator": {
-            "@type": "Organization",
-            "name": "Shopify Theme Detector"
-        },
-        "keywords": "Shopify Theme Detector, What Shopify Theme is That, theme identifier, Shopify theme finder"
-    }
-    </script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1 class="hero-title">
+                    {{ i18n.get_text('hero.title') }}
+                </h1>
+                <p class="hero-subtitle">
+                    {{ i18n.get_text('hero.subtitle') }}
+                </p>
+                <p style="color: var(--shopify-gray); margin-top: 1rem; font-size: 1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    {{ i18n.get_text('hero.description') }}
+                </p>
+            </section>
+
+            <!-- Detector Card -->
+            <section class="detector-card">
+                <h2 class="card-title">
+                    <i class="fas fa-magic" style="color: var(--shopify-green); margin-right: 0.5rem;"></i>
+                    {{ i18n.get_text('detector.button') }}
+                </h2>
+                
+                <form id="detectorForm">
+                    <div class="form-group">
+                        <label for="urlInput" class="form-label">Shopify Store URL</label>
+                        <input 
+                            type="url" 
+                            class="form-input" 
+                            id="urlInput" 
+                            placeholder="{{ i18n.get_text('detector.placeholder') }}"
+                            required
+                        >
+                    </div>
+                    
+                    <button type="submit" class="detect-btn" id="detectBtn">
+                        <i class="fas fa-search"></i>
+                        {{ i18n.get_text('detector.button') }}
+                    </button>
+                </form>
+                
+                <!-- Loading -->
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>{{ i18n.get_text('detector.analyzing') }}</p>
+                </div>
+                
+                <!-- Results -->
+                <div class="result-card" id="resultCard">
+                    <div id="resultContent"></div>
+                </div>
+            </section>
+
+            <!-- Examples -->
+            <section class="examples-section">
+                <h2 class="examples-title">Try with Popular Shopify Stores</h2>
+                <div class="examples-grid">
+                    <a href="#" class="example-card" data-url="https://www.allbirds.com">
+                        <div class="example-logo">
+                            <i class="fas fa-feather-alt"></i>
+                        </div>
+                        <div class="example-name">Allbirds</div>
+                        <div class="example-url">allbirds.com</div>
+                    </a>
+                    
+                    <a href="#" class="example-card" data-url="https://www.gymshark.com">
+                        <div class="example-logo">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <div class="example-name">Gymshark</div>
+                        <div class="example-url">gymshark.com</div>
+                    </a>
+                    
+                    <a href="#" class="example-card" data-url="https://www.colourpop.com">
+                        <div class="example-logo">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="example-name">ColourPop</div>
+                        <div class="example-url">colourpop.com</div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- How to Use Guide -->
+            <section class="features-section">
+                <h2 class="features-title">
+                    <i class="fas fa-question-circle" style="color: var(--shopify-green); margin-right: 0.5rem;"></i>
+                    {{ i18n.get_text('steps.title') }}
+                </h2>
+                <div class="features-grid" style="grid-template-columns: 1fr;">
+                    <div class="feature-card" style="text-align: left; max-width: 900px; margin: 0 auto;">
+                        <div class="section-content" style="color: var(--shopify-gray); font-size: 1rem; line-height: 1.7;">
+                            <h3 style="color: var(--shopify-dark-green); margin-bottom: 2rem; font-size: 1.5rem; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.5rem; white-space: nowrap;">
+                                <i class="fas fa-cogs"></i> {{ i18n.get_text('steps.title') }}
+                            </h3>
+                            
+                            <div class="step-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 3rem 0; align-items: stretch;">
+                                <!-- Step 1 -->
+                                <div class="step-card" style="background: linear-gradient(135deg, #f8fffe 0%, var(--shopify-light-green) 100%); padding: 1.8rem; border-radius: var(--border-radius); box-shadow: 0 4px 15px rgba(0, 200, 150, 0.1); position: relative; border: 2px solid rgba(0, 200, 150, 0.1); height: 400px; display: flex; flex-direction: column;">
+                                    <!-- Header with number and title -->
+                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem;">
+                                        <div style="background: linear-gradient(135deg, var(--shopify-green), var(--shopify-dark-green)); color: white; width: 3rem; height: 3rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 4px 15px rgba(0, 200, 150, 0.3);">1</div>
+                                        <div style="flex: 1; min-width: 0;">
+                                            <h4 style="color: var(--shopify-dark-gray); margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                <i class="fas fa-link" style="color: var(--shopify-green);"></i>
+                                                {{ i18n.get_text('steps.step1.title') }}
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Content -->
+                                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                                        <p style="color: var(--shopify-gray); font-size: 1rem; line-height: 1.6; margin-bottom: 1.2rem; text-align: left;">{{ i18n.get_text('steps.step1.description') }}</p>
+                                        
+                                        <!-- Info box -->
+                                        <div style="background: white; padding: 0.7rem; border-radius: 8px; border-left: 4px solid var(--shopify-green); font-size: 0.8rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); height: 45px; display: flex; align-items: center; overflow: hidden; white-space: nowrap;">
+                                            <i class="fas fa-info-circle" style="color: var(--shopify-green); margin-right: 0.5rem;"></i>
+                                            <strong>{{ i18n.get_text('steps.step1.example') }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Step 2 -->
+                                <div class="step-card" style="background: linear-gradient(135deg, #f8fffe 0%, var(--shopify-light-green) 100%); padding: 1.8rem; border-radius: var(--border-radius); box-shadow: 0 4px 15px rgba(0, 200, 150, 0.1); position: relative; border: 2px solid rgba(0, 200, 150, 0.1); height: 400px; display: flex; flex-direction: column;">
+                                    <!-- Header with number and title -->
+                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem;">
+                                        <div style="background: linear-gradient(135deg, var(--shopify-green), var(--shopify-dark-green)); color: white; width: 3rem; height: 3rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 4px 15px rgba(0, 200, 150, 0.3);">2</div>
+                                        <div style="flex: 1; min-width: 0;">
+                                            <h4 style="color: var(--shopify-dark-gray); margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                <i class="fas fa-mouse-pointer" style="color: var(--shopify-green);"></i>
+                                                {{ i18n.get_text('steps.step2.title') }}
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Content -->
+                                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                                        <p style="color: var(--shopify-gray); font-size: 1rem; line-height: 1.6; margin-bottom: 1.2rem; text-align: left;">{{ i18n.get_text('steps.step2.description') }}</p>
+                                        
+                                        <!-- Info box -->
+                                        <div style="background: white; padding: 0.7rem; border-radius: 8px; border-left: 4px solid var(--shopify-green); font-size: 0.8rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); height: 45px; display: flex; align-items: center; overflow: hidden; white-space: nowrap;">
+                                            <i class="fas fa-clock" style="color: var(--shopify-green); margin-right: 0.5rem;"></i>
+                                            <strong>{{ i18n.get_text('steps.step2.note') }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Step 3 -->
+                                <div class="step-card" style="background: linear-gradient(135deg, #f8fffe 0%, var(--shopify-light-green) 100%); padding: 1.8rem; border-radius: var(--border-radius); box-shadow: 0 4px 15px rgba(0, 200, 150, 0.1); position: relative; border: 2px solid rgba(0, 200, 150, 0.1); height: 400px; display: flex; flex-direction: column;">
+                                    <!-- Header with number and title -->
+                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem;">
+                                        <div style="background: linear-gradient(135deg, var(--shopify-green), var(--shopify-dark-green)); color: white; width: 3rem; height: 3rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 4px 15px rgba(0, 200, 150, 0.3);">3</div>
+                                        <div style="flex: 1; min-width: 0;">
+                                            <h4 style="color: var(--shopify-dark-gray); margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                <i class="fas fa-check-circle" style="color: var(--shopify-green);"></i>
+                                                {{ i18n.get_text('steps.step3.title') }}
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Content -->
+                                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                                        <p style="color: var(--shopify-gray); font-size: 1rem; line-height: 1.6; margin-bottom: 1.2rem; text-align: left;">{{ i18n.get_text('steps.step3.description') }}</p>
+                                        
+                                        <!-- Info box -->
+                                        <div style="background: white; padding: 0.7rem; border-radius: 8px; border-left: 4px solid var(--shopify-green); font-size: 0.8rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); height: 45px; display: flex; align-items: center; overflow: hidden; white-space: nowrap;">
+                                            <i class="fas fa-chart-line" style="color: var(--shopify-green); margin-right: 0.5rem;"></i>
+                                            <strong>{{ i18n.get_text('steps.step3.note') }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pro Tips Section -->
+                            <div style="background: linear-gradient(135deg, var(--shopify-light-green) 0%, #e0f7f1 100%); padding: 1.8rem; border-radius: var(--border-radius); margin: 3rem 0; border: 2px solid var(--shopify-green); position: relative;">
+                                <div style="position: absolute; top: -12px; left: 2rem; background: var(--shopify-green); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
+                                    <i class="fas fa-star"></i> PRO TIPS
+                                </div>
+                                <h4 style="color: var(--shopify-dark-green); margin-bottom: 1.2rem; margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.3rem;">
+                                    <i class="fas fa-lightbulb"></i> For Best Detection Results:
+                                </h4>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                        <i class="fas fa-globe" style="color: var(--shopify-green); font-size: 1.2rem;"></i>
+                                        <span>Use the full URL (including https://)</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                        <i class="fas fa-unlock" style="color: var(--shopify-green); font-size: 1.2rem;"></i>
+                                        <span>Ensure website is publicly accessible</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                        <i class="fas fa-puzzle-piece" style="color: var(--shopify-green); font-size: 1.2rem;"></i>
+                                        <span>Works best with standard themes</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                        <i class="fas fa-percentage" style="color: var(--shopify-green); font-size: 1.2rem;"></i>
+                                        <span>Check confidence score for accuracy</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="features-section">
+                <h2 class="features-title">{{ i18n.get_text('features.title') }}</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="feature-title">{{ i18n.get_text('features.fast.title') }}</h3>
+                        <p class="feature-description">{{ i18n.get_text('features.fast.description') }}</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">{{ i18n.get_text('features.free.title') }}</h3>
+                        <p class="feature-description">{{ i18n.get_text('features.free.description') }}</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">{{ i18n.get_text('features.accurate.title') }}</h3>
+                        <p class="feature-description">{{ i18n.get_text('features.accurate.description') }}</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>{{ i18n.get_text('footer.copyright') }}</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">{{ i18n.get_text('footer.disclaimer') }}</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
     <script>
-        // DOM元素
+        // DOM Elements
         const form = document.getElementById('detectorForm');
         const urlInput = document.getElementById('urlInput');
         const detectBtn = document.getElementById('detectBtn');
         const loading = document.getElementById('loading');
         const resultCard = document.getElementById('resultCard');
         const resultContent = document.getElementById('resultContent');
-        const exampleLinks = document.querySelectorAll('.example-link');
+        const exampleCards = document.querySelectorAll('.example-card');
         
-        // 表单提交事件
+        // Form Submit Event
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             await detectTheme();
         });
         
-        // 示例链接点击事件
-        exampleLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
+        // Example Cards Event
+        exampleCards.forEach(card => {
+            card.addEventListener('click', (e) => {
                 e.preventDefault();
-                const url = link.getAttribute('data-url');
+                const url = card.getAttribute('data-url');
                 urlInput.value = url;
                 detectTheme();
             });
         });
         
-        // 主题检测函数
+        // Main Detection Function
         async function detectTheme() {
             const url = urlInput.value.trim();
             
             if (!url) {
-                showError('Please enter a valid URL');
+                showError('Please enter a valid Shopify store URL');
                 return;
             }
             
-            // 显示加载状态
+            // Show Loading
             showLoading();
             
             try {
@@ -516,31 +985,31 @@
                 if (data.success) {
                     showSuccess(data);
                 } else {
-                    showError(data.error || 'Shopify theme detection failed. Please verify the URL is a valid Shopify store.');
+                    showError(data.error || 'Theme detection failed. Please verify the URL is a valid Shopify store.');
                 }
                 
             } catch (error) {
                 console.error('Detection error:', error);
-                showError('Network error occurred while detecting Shopify theme. Please check your connection and try again.');
+                showError('Network error occurred. Please check your connection and try again.');
             }
         }
         
-        // 显示加载状态
+        // Show Loading State
         function showLoading() {
             detectBtn.disabled = true;
-            detectBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Detecting...';
+            detectBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Detecting...';
             loading.style.display = 'block';
             resultCard.style.display = 'none';
         }
         
-        // 隐藏加载状态
+        // Hide Loading State
         function hideLoading() {
             detectBtn.disabled = false;
-            detectBtn.innerHTML = '<i class="fas fa-search me-2"></i>Detect Theme';
+            detectBtn.innerHTML = '<i class="fas fa-search"></i> {{ i18n.get_text('detector.button') }}';
             loading.style.display = 'none';
         }
         
-        // 显示成功结果
+        // Show Success Result
         function showSuccess(data) {
             hideLoading();
             
@@ -548,39 +1017,39 @@
             const confidence = theme.confidence || 0;
             
             resultContent.innerHTML = `
-                <div class="d-flex align-items-center mb-3">
-                    <i class="fas fa-check-circle text-success me-2"></i>
-                    <h5 class="mb-0">Shopify Theme Detected Successfully!</h5>
+                <div class="result-title">
+                    <i class="fas fa-check-circle"></i>
+                    {{ i18n.get_text('results.success') }}
                 </div>
                 
-                <div class="theme-info">
-                    <div class="row">
-                        <div class="col-4">Website:</div>
-                        <div class="col-8">${data.site_title || 'Unknown'}</div>
+                <div class="result-info">
+                    <div class="result-label">{{ i18n.get_text('results.store_title') }}:</div>
+                    <div class="result-value">${data.site_title || 'Unknown'}</div>
+                    
+                    <div class="result-label">URL:</div>
+                    <div class="result-value">
+                        <a href="${data.url}" target="_blank" rel="nofollow noopener" style="color: var(--shopify-green); text-decoration: none;">
+                            ${data.url}
+                        </a>
                     </div>
-                    <div class="row">
-                        <div class="col-4">URL:</div>
-                        <div class="col-8"><a href="${data.url}" target="_blank" rel="nofollow noopener" class="text-decoration-none">${data.url}</a></div>
+                    
+                    <div class="result-label">{{ i18n.get_text('results.theme_name') }}:</div>
+                    <div class="result-value" style="font-weight: 600; color: var(--shopify-dark-green);">
+                        ${theme.name}
                     </div>
-                    <div class="row">
-                        <div class="col-4">Shopify Theme:</div>
-                        <div class="col-8"><strong>${theme.name}</strong></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">Confidence:</div>
-                        <div class="col-8">
-                            ${confidence}%
-                            <div class="confidence-bar">
-                                <div class="confidence-fill" style="width: ${confidence}%"></div>
-                            </div>
+                    
+                    <div class="result-label">{{ i18n.get_text('results.confidence') }}:</div>
+                    <div class="result-value">
+                        ${confidence}%
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" style="width: ${confidence}%"></div>
                         </div>
                     </div>
+                    
                     ${theme.detected_patterns && theme.detected_patterns.length > 0 ? `
-                    <div class="row">
-                        <div class="col-4">Detection Basis:</div>
-                        <div class="col-8">
-                            <small class="text-muted">${theme.detected_patterns.join(', ')}</small>
-                        </div>
+                    <div class="result-label">Detection Method:</div>
+                    <div class="result-value">
+                        <small style="color: var(--shopify-gray);">${theme.detected_patterns.join(', ')}</small>
                     </div>
                     ` : ''}
                 </div>
@@ -590,32 +1059,42 @@
             resultCard.style.display = 'block';
         }
         
-        // 显示错误结果
+        // Show Error Result
         function showError(message) {
             hideLoading();
             
             resultContent.innerHTML = `
-                <div class="d-flex align-items-center mb-3">
-                    <i class="fas fa-exclamation-circle text-danger me-2"></i>
-                    <h5 class="mb-0">Shopify Theme Detection Failed</h5>
+                <div class="result-title">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ i18n.get_text('results.error') }}
                 </div>
-                <p class="mb-0">${message}</p>
-                <small class="text-muted mt-2 d-block">Please ensure you enter a valid Shopify store URL. Our Shopify Theme Detector works best with active Shopify websites.</small>
+                <p style="margin-top: 1rem; color: var(--shopify-gray);">${message}</p>
+                <small style="color: var(--shopify-gray); margin-top: 1rem; display: block;">
+                    Please ensure you enter a valid Shopify store URL. Our detector works best with active Shopify websites.
+                </small>
             `;
             
             resultCard.className = 'result-card result-error';
             resultCard.style.display = 'block';
         }
         
-        // URL输入框回车事件
-        urlInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                detectTheme();
+        // Language Switcher Toggle
+        function toggleLangMenu() {
+            const langMenu = document.getElementById('langMenu');
+            langMenu.classList.toggle('show');
+        }
+        
+        // Close language menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const langSwitcher = document.querySelector('.language-switcher');
+            const langMenu = document.getElementById('langMenu');
+            
+            if (!langSwitcher.contains(e.target)) {
+                langMenu.classList.remove('show');
             }
         });
         
-        // 页面加载完成后聚焦到输入框
+        // Focus Input on Page Load
         window.addEventListener('load', () => {
             urlInput.focus();
         });

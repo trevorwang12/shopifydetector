@@ -1,0 +1,73 @@
+{
+  "site": {
+    "title": "Détecteur de Thème Shopify",
+    "description": "Outil gratuit pour identifier instantanément n'importe quel thème Shopify"
+  },
+  "nav": {
+    "home": "Accueil",
+    "blog": "Blog",
+    "about": "À propos",
+    "contact": "Contact",
+    "disclaimer": "Avertissement"
+  },
+  "hero": {
+    "title": "Quel est ce Thème Shopify ?",
+    "subtitle": "Découvrez instantanément le thème derrière n'importe quelle boutique Shopify avec notre outil de détection gratuit",
+    "description": "Entrez l'URL d'une boutique Shopify ci-dessous et nous identifierons le thème utilisé, y compris le nom du thème, la version et les informations du développeur."
+  },
+  "detector": {
+    "placeholder": "Entrez l'URL de la boutique Shopify (ex: store.myshopify.com)",
+    "button": "Détecter le Thème",
+    "analyzing": "Analyse du site web..."
+  },
+  "steps": {
+    "title": "Processus Simple en 3 Étapes :",
+    "step1": {
+      "title": "Entrer l'URL",
+      "description": "Copiez et collez l'URL de n'importe quelle boutique Shopify dans le champ ci-dessus. Assurez-vous qu'il s'agit d'un site web valide.",
+      "example": "Ex : store.myshopify.com"
+    },
+    "step2": {
+      "title": "Cliquer Détecter",
+      "description": "Notre algorithme analyse le code du site web, les fichiers CSS et les modèles pour identifier le thème Shopify.",
+      "note": "Vitesse : 2-5 secondes"
+    },
+    "step3": {
+      "title": "Obtenir les Résultats",
+      "description": "Consultez les informations détaillées du thème incluant le nom, le développeur, la version et le score de confiance.",
+      "note": "Taux de précision 99%"
+    }
+  },
+  "features": {
+    "title": "Pourquoi Choisir Notre Détecteur de Thème ?",
+    "fast": {
+      "title": "Ultra Rapide",
+      "description": "Obtenez des résultats en moins de 5 secondes avec nos algorithmes de détection optimisés"
+    },
+    "accurate": {
+      "title": "Très Précis",
+      "description": "Taux de précision de 99% avec reconnaissance de motifs avancée et empreinte de thème"
+    },
+    "free": {
+      "title": "Entièrement Gratuit",
+      "description": "Pas d'inscription requise, pas de coûts cachés, détections de thème illimitées"
+    },
+    "comprehensive": {
+      "title": "Complet",
+      "description": "Détecte les thèmes gratuits et premium avec des informations détaillées"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Détecteur de Thème Shopify. Tous droits réservés.",
+    "disclaimer": "Cet outil est à des fins éducatives uniquement et n'est pas affilié à Shopify Inc."
+  },
+  "results": {
+    "success": "Thème Détecté avec Succès !",
+    "theme_name": "Nom du Thème",
+    "developer": "Développeur",
+    "confidence": "Confiance",
+    "version": "Version",
+    "store_title": "Titre de la Boutique",
+    "error": "Erreur lors de la détection du thème. Veuillez vérifier l'URL et réessayer."
+  }
+}

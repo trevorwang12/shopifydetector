@@ -1,0 +1,73 @@
+{
+  "site": {
+    "title": "Shopifyテーマ検出器",
+    "description": "任意のShopifyテーマを瞬時に識別する無料ツール"
+  },
+  "nav": {
+    "home": "ホーム",
+    "blog": "ブログ",
+    "about": "について",
+    "contact": "お問い合わせ",
+    "disclaimer": "免責事項"
+  },
+  "hero": {
+    "title": "これはどのShopifyテーマですか？",
+    "subtitle": "無料テーマ検出ツールで、任意のShopifyストアの背後にあるテーマを瞬時に発見",
+    "description": "下にShopifyストアのURLを入力すると、テーマ名、バージョン、開発者情報を含む使用中のテーマを識別します。"
+  },
+  "detector": {
+    "placeholder": "ShopifyストアのURLを入力（例：store.myshopify.com）",
+    "button": "テーマを検出",
+    "analyzing": "ウェブサイトを分析中..."
+  },
+  "steps": {
+    "title": "シンプルな3ステッププロセス：",
+    "step1": {
+      "title": "URLを入力",
+      "description": "任意のShopifyストアのURLを上の入力フィールドにコピー＆ペーストしてください。有効なウェブサイトであることを確認してください。",
+      "example": "例：store.myshopify.com"
+    },
+    "step2": {
+      "title": "検出をクリック",
+      "description": "私たちのアルゴリズムがウェブサイトコード、CSSファイル、パターンを分析してShopifyテーマを識別します。",
+      "note": "速度：2-5秒"
+    },
+    "step3": {
+      "title": "結果を取得",
+      "description": "名前、開発者、バージョン、信頼スコアを含む詳細なテーマ情報を表示します。",
+      "note": "99%の精度率"
+    }
+  },
+  "features": {
+    "title": "なぜ私たちのテーマ検出器を選ぶのか？",
+    "fast": {
+      "title": "超高速",
+      "description": "最適化された検出アルゴリズムで5秒以内に結果を取得"
+    },
+    "accurate": {
+      "title": "高精度",
+      "description": "高度なパターン認識とテーマフィンガープリンティングによる99%の精度率"
+    },
+    "free": {
+      "title": "完全無料",
+      "description": "登録不要、隠れた費用なし、無制限のテーマ検出"
+    },
+    "comprehensive": {
+      "title": "包括的",
+      "description": "詳細情報付きで無料・有料テーマの両方を検出"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Shopifyテーマ検出器。全著作権所有。",
+    "disclaimer": "このツールは教育目的のみであり、Shopify Inc.とは関連がありません。"
+  },
+  "results": {
+    "success": "テーマ検出成功！",
+    "theme_name": "テーマ名",
+    "developer": "開発者",
+    "confidence": "信頼度",
+    "version": "バージョン",
+    "store_title": "ストアタイトル",
+    "error": "テーマ検出中にエラーが発生しました。URLを確認して再試行してください。"
+  }
+}

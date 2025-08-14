@@ -3,306 +3,431 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disclaimer - Shopify Theme Detector</title>
-    <meta name="description" content="Legal disclaimer and terms of use for Shopify Theme Detector service.">
-    <meta name="keywords" content="disclaimer, terms, legal, shopify theme detector">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Disclaimer - Shopify Theme Detector | Legal Terms & Conditions</title>
+    <meta name="description" content="Read the legal disclaimer and terms of use for Shopify Theme Detector - the free tool to identify what Shopify theme any store is using.">
+    <meta name="keywords" content="Shopify Theme Detector disclaimer, legal terms, privacy policy, theme detection tool terms, Shopify theme identifier legal">
+    <meta name="author" content="Shopify Theme Detector">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --shopify-green: #00C896;
+            --shopify-dark-green: #108043;
+            --shopify-light-green: #E7F7F4;
+            --shopify-purple: #7B68EE;
+            --shopify-gray: #6B7280;
+            --shopify-light-gray: #F3F4F6;
+            --shopify-dark-gray: #1F2937;
+            --border-radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 30px rgba(0, 200, 150, 0.2);
+        }
+        
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--shopify-light-green) 0%, #ffffff 100%);
+            min-height: 100vh;
+            color: var(--shopify-dark-gray);
+            line-height: 1.6;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
         
+        /* Header */
         .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-            padding: 40px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
-        .header h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* Navigation Styles */
         .nav {
-            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--shopify-dark-green);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+            color: var(--shopify-green);
         }
         
         .nav-links {
             display: flex;
-            justify-content: center;
-            gap: 20px;
             list-style: none;
-            margin: 0;
-            padding: 0;
-            flex-wrap: wrap;
+            gap: 2rem;
         }
         
         .nav-links a {
-            color: white;
+            color: var(--shopify-gray);
             text-decoration: none;
             font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            display: block;
+            transition: color 0.3s ease;
         }
         
         .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: var(--shopify-green);
         }
         
         .nav-links a.active {
-            background: rgba(255, 255, 255, 0.3);
+            color: var(--shopify-dark-green);
             font-weight: 600;
         }
         
-        .content-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-            margin-bottom: 30px;
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
         }
         
-        .content-card h2 {
-            color: #333;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
         }
         
-        .content-card h3 {
-            color: #555;
-            font-size: 1.4rem;
-            margin-top: 30px;
-            margin-bottom: 15px;
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--shopify-dark-gray);
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
         
-        .content-card p {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        .content-card ul {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-        
-        .content-card li {
-            margin-bottom: 8px;
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--shopify-gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .highlight {
-            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 4px solid #667eea;
+            color: var(--shopify-green);
+            font-weight: 600;
         }
         
-        .footer {
-            text-align: center;
-            color: white;
-            padding: 40px 0;
-            margin-top: 40px;
+        /* Content Card */
+        .content-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 3rem;
+            margin-bottom: 2rem;
         }
         
-        .footer p {
-            opacity: 0.8;
+        .content-section {
+            margin-bottom: 3rem;
+        }
+        
+        .content-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--shopify-dark-gray);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-title i {
+            color: var(--shopify-green);
+        }
+        
+        .subsection-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--shopify-dark-gray);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-content {
+            color: var(--shopify-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        .section-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .section-content ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .section-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .important-notice {
+            background: var(--shopify-light-green);
+            border: 2px solid var(--shopify-green);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .important-notice p {
             margin: 0;
+            font-weight: 500;
+            color: var(--shopify-dark-green);
         }
         
-        /* Responsive Design */
+        .contact-link {
+            color: var(--shopify-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--shopify-dark-gray);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .header p {
-                font-size: 1rem;
-            }
-            
-            .content-card {
-                padding: 20px;
-                margin-bottom: 20px;
-            }
-            
-            .content-card h2 {
-                font-size: 1.5rem;
+            .hero-title {
+                font-size: 2.5rem;
             }
             
             .nav-links {
-                gap: 10px;
-            }
-            
-            .nav-links a {
-                padding: 8px 15px;
-                font-size: 0.9rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .header {
-                padding: 20px 0;
-            }
-            
-            .header h1 {
-                font-size: 1.8rem;
+                display: none;
             }
             
             .content-card {
-                padding: 15px;
-            }
-            
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 8px;
+                padding: 2rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1><i class="fas fa-search me-3"></i>Disclaimer</h1>
-            <p>Legal information and terms of use for our Shopify Theme Detection service</p>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <i class="fas fa-search"></i>
+                    Theme Detector
+                </a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/disclaimer" class="active">Disclaimer</a></li>
+                </ul>
+            </nav>
         </div>
-        
-        <!-- Navigation -->
-        <nav class="nav">
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/contact">Contact Us</a></li>
-                <li><a href="/disclaimer" class="active">Disclaimer</a></li>
-            </ul>
-        </nav>
-        
-        <!-- Disclaimer Content -->
-        <div class="content-card">
-            <h2><i class="fas fa-exclamation-triangle me-2"></i>Legal Disclaimer</h2>
-            
-            <div class="highlight">
-                <p><strong>Important Notice:</strong> This service is provided for informational purposes only. Please read the following terms carefully before using our Shopify Theme Detector.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1 class="hero-title">
+                    <span class="highlight">Legal</span> Disclaimer
+                </h1>
+                <p class="hero-subtitle">
+                    Legal information and terms of use for our Shopify Theme Detector service
+                </p>
+            </section>
+
+            <!-- Main Content Card -->
+            <div class="content-card">
+                <div class="important-notice">
+                    <p><strong>Important Notice:</strong> This Shopify Theme Detector service is provided for informational purposes only. Please read the following terms carefully before using our free theme detection tool.</p>
+                </div>
+                
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-info-circle"></i>
+                        About Our Shopify Theme Detector
+                    </h2>
+                    <div class="section-content">
+                        <p>The Shopify Theme Detector is a free web-based tool designed to identify themes used on Shopify websites. This service analyzes publicly available information and provides estimates based on technical analysis of Shopify store code, CSS files, and theme patterns.</p>
+                        
+                        <p>Our theme detection algorithm helps users answer the question "What Shopify theme is that?" by examining various elements of a Shopify store's frontend code structure.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Accuracy Disclaimer
+                    </h2>
+                    <div class="section-content">
+                        <p>While we strive to provide accurate Shopify theme detection results, we cannot guarantee 100% accuracy. The theme detection process involves:</p>
+                        <ul>
+                            <li>Analysis of publicly available website code and assets</li>
+                            <li>Pattern matching and heuristic algorithms for theme identification</li>
+                            <li>Database comparison with known Shopify theme signatures</li>
+                            <li>Automated detection that may occasionally produce false results</li>
+                            <li>Recognition of both free and premium Shopify themes</li>
+                        </ul>
+                        <p>Custom themes or heavily modified themes may not be detected accurately by our Shopify Theme Detector.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-shield-alt"></i>
+                        Limitation of Liability
+                    </h2>
+                    <div class="section-content">
+                        <p>The creators and operators of this Shopify Theme Detector service shall not be liable for:</p>
+                        <ul>
+                            <li>Any inaccuracies in theme detection results</li>
+                            <li>Business decisions made based on our theme analysis</li>
+                            <li>Any direct, indirect, incidental, or consequential damages</li>
+                            <li>Loss of profits, data, or business opportunities</li>
+                            <li>Misidentification of premium or custom Shopify themes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-user-shield"></i>
+                        Privacy and Data Usage
+                    </h2>
+                    <div class="section-content">
+                        <p>When you use our Shopify Theme Detector:</p>
+                        <ul>
+                            <li>We only analyze publicly accessible website information</li>
+                            <li>No personal data is collected from analyzed Shopify stores</li>
+                            <li>URLs submitted for theme detection may be logged for service improvement</li>
+                            <li>We do not store or share sensitive business information</li>
+                            <li>No cookies or tracking mechanisms are used for theme detection</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-copyright"></i>
+                        Intellectual Property
+                    </h2>
+                    <div class="section-content">
+                        <p>This Shopify Theme Detector service respects intellectual property rights:</p>
+                        <ul>
+                            <li>We do not claim ownership of analyzed themes or Shopify websites</li>
+                            <li>Theme names and information are provided for identification purposes only</li>
+                            <li>All trademarks and copyrights belong to their respective owners</li>
+                            <li>Our analysis is based on publicly available information only</li>
+                            <li>Shopify® is a trademark of Shopify Inc.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-server"></i>
+                        Service Availability
+                    </h2>
+                    <div class="section-content">
+                        <p>We provide this Shopify Theme Detector service on an "as-is" basis:</p>
+                        <ul>
+                            <li>Service availability is not guaranteed</li>
+                            <li>We may modify or discontinue the service at any time</li>
+                            <li>No warranty is provided regarding uptime or performance</li>
+                            <li>Users should not rely on this service for critical business operations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-gavel"></i>
+                        Acceptable Use
+                    </h2>
+                    <div class="section-content">
+                        <p>Users of our Shopify Theme Detector agree to:</p>
+                        <ul>
+                            <li>Use the service for legitimate purposes only</li>
+                            <li>Not attempt to reverse engineer or exploit the service</li>
+                            <li>Respect rate limits and not overload our servers</li>
+                            <li>Not use the service for any illegal activities</li>
+                            <li>Not use the service to infringe on others' intellectual property</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-edit"></i>
+                        Updates and Changes
+                    </h2>
+                    <div class="section-content">
+                        <p>This disclaimer may be updated periodically to reflect changes in our Shopify Theme Detector service. Continued use of the service constitutes acceptance of any changes. Users are encouraged to review this page regularly.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-envelope"></i>
+                        Contact Information
+                    </h2>
+                    <div class="section-content">
+                        <p>If you have questions about this disclaimer or our Shopify Theme Detector service, please contact us through our <a href="/contact" class="contact-link">Contact page</a>.</p>
+                    </div>
+                </div>
+
+                <div class="important-notice">
+                    <p><strong>Last Updated:</strong> January 2025</p>
+                    <p><strong>Effective Date:</strong> This disclaimer is effective immediately upon posting.</p>
+                </div>
             </div>
-            
-            <h3>1. Service Description</h3>
-            <p>The Shopify Theme Detector is a web-based tool designed to identify themes used on Shopify websites. This service analyzes publicly available information and provides estimates based on technical analysis.</p>
-            
-            <h3>2. Accuracy Disclaimer</h3>
-            <p>While we strive to provide accurate theme detection results, we cannot guarantee 100% accuracy. The detection process involves:</p>
-            <ul>
-                <li>Analysis of publicly available website code and assets</li>
-                <li>Pattern matching and heuristic algorithms</li>
-                <li>Database comparison with known theme signatures</li>
-                <li>Automated detection that may occasionally produce false results</li>
-            </ul>
-            
-            <h3>3. Limitation of Liability</h3>
-            <p>The creators and operators of this service shall not be liable for:</p>
-            <ul>
-                <li>Any inaccuracies in theme detection results</li>
-                <li>Business decisions made based on our analysis</li>
-                <li>Any direct, indirect, incidental, or consequential damages</li>
-                <li>Loss of profits, data, or business opportunities</li>
-            </ul>
-            
-            <h3>4. Privacy and Data Usage</h3>
-            <p>When you use our service:</p>
-            <ul>
-                <li>We only analyze publicly accessible website information</li>
-                <li>No personal data is collected from analyzed websites</li>
-                <li>URLs submitted for analysis may be logged for service improvement</li>
-                <li>We do not store or share sensitive business information</li>
-            </ul>
-            
-            <h3>5. Intellectual Property</h3>
-            <p>This service respects intellectual property rights:</p>
-            <ul>
-                <li>We do not claim ownership of analyzed themes or websites</li>
-                <li>Theme names and information are provided for identification purposes only</li>
-                <li>All trademarks and copyrights belong to their respective owners</li>
-                <li>Our analysis is based on publicly available information only</li>
-            </ul>
-            
-            <h3>6. Service Availability</h3>
-            <p>We provide this service on an "as-is" basis:</p>
-            <ul>
-                <li>Service availability is not guaranteed</li>
-                <li>We may modify or discontinue the service at any time</li>
-                <li>No warranty is provided regarding uptime or performance</li>
-                <li>Users should not rely on this service for critical business operations</li>
-            </ul>
-            
-            <h3>7. Acceptable Use</h3>
-            <p>Users agree to:</p>
-            <ul>
-                <li>Use the service for legitimate purposes only</li>
-                <li>Not attempt to reverse engineer or exploit the service</li>
-                <li>Respect rate limits and not overload our servers</li>
-                <li>Not use the service for any illegal activities</li>
-            </ul>
-            
-            <h3>8. Third-Party Content</h3>
-            <p>Our service may reference or link to third-party themes, websites, or services. We are not responsible for:</p>
-            <ul>
-                <li>The accuracy of third-party information</li>
-                <li>The availability of external websites or services</li>
-                <li>The content or practices of third-party providers</li>
-            </ul>
-            
-            <h3>9. Updates and Changes</h3>
-            <p>This disclaimer may be updated periodically. Continued use of the service constitutes acceptance of any changes. Users are encouraged to review this page regularly.</p>
-            
-            <h3>10. Contact Information</h3>
-            <p>If you have questions about this disclaimer or our service, please contact us through our <a href="/contact" style="color: #667eea; text-decoration: none;">Contact Us</a> page.</p>
-            
-            <div class="highlight">
-                <p><strong>Last Updated:</strong> December 2024</p>
-                <p><strong>Effective Date:</strong> This disclaimer is effective immediately upon posting.</p>
-            </div>
         </div>
-        
-        <!-- Footer -->
-        <div class="footer">
-            <p>&copy; 2024 Shopify Theme Detector. This service is provided for educational and informational purposes.</p>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Shopify Theme Detector. Free tool to discover what Shopify theme any store is using.</p>
         </div>
-    </div>
+    </footer>
 </body>
 </html>

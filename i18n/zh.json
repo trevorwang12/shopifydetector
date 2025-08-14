@@ -1,0 +1,73 @@
+{
+  "site": {
+    "title": "Shopify主题检测器",
+    "description": "免费工具，即时识别任何Shopify主题"
+  },
+  "nav": {
+    "home": "首页",
+    "blog": "博客",
+    "about": "关于",
+    "contact": "联系",
+    "disclaimer": "免责声明"
+  },
+  "hero": {
+    "title": "这是什么Shopify主题？",
+    "subtitle": "使用我们的免费主题检测工具即时发现任何Shopify商店背后的主题",
+    "description": "在下面输入Shopify商店URL，我们将识别正在使用的主题，包括主题名称、版本和开发者信息。"
+  },
+  "detector": {
+    "placeholder": "输入Shopify商店URL（例如：store.myshopify.com）",
+    "button": "检测主题",
+    "analyzing": "正在分析网站..."
+  },
+  "steps": {
+    "title": "简单的3步流程：",
+    "step1": {
+      "title": "输入商店URL",
+      "description": "复制并粘贴任何Shopify商店URL到上面的输入框中。确保它是一个有效的网站。",
+      "example": "例如：store.myshopify.com"
+    },
+    "step2": {
+      "title": "点击检测",
+      "description": "我们的算法分析网站代码、CSS文件和模式来识别Shopify主题。",
+      "note": "速度：2-5秒"
+    },
+    "step3": {
+      "title": "获取结果",
+      "description": "查看详细的主题信息，包括名称、开发者、版本和置信度评分。",
+      "note": "99%准确率"
+    }
+  },
+  "features": {
+    "title": "为什么选择我们的主题检测器？",
+    "fast": {
+      "title": "闪电般快速",
+      "description": "使用我们优化的检测算法在5秒内获得结果"
+    },
+    "accurate": {
+      "title": "高度准确",
+      "description": "通过高级模式识别和主题指纹识别实现99%的准确率"
+    },
+    "free": {
+      "title": "完全免费",
+      "description": "无需注册，无隐藏费用，无限制主题检测"
+    },
+    "comprehensive": {
+      "title": "全面性",
+      "description": "检测免费和付费主题，提供详细信息"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Shopify主题检测器。保留所有权利。",
+    "disclaimer": "此工具仅供教育目的使用，不隶属于Shopify Inc。"
+  },
+  "results": {
+    "success": "主题检测成功！",
+    "theme_name": "主题名称",
+    "developer": "开发者",
+    "confidence": "置信度",
+    "version": "版本",
+    "store_title": "商店标题",
+    "error": "检测主题时出错。请检查URL并重试。"
+  }
+}

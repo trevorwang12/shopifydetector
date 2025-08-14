@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # Development version with hot reload
+  shopify-theme-detector-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: shopify-theme-detector-dev
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_DEBUG=True
+      - PORT=5000
+      - PYTHONUNBUFFERED=1
+      - FLASK_ENV=development
+    volumes:
+      # Mount entire project for hot reload
+      - .:/app
+      # Exclude certain directories to improve performance
+      - /app/__pycache__
+      - /app/.git
+    command: python app.py
+    restart: unless-stopped
+    networks:
+      - dev-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.5'
+
+networks:
+  dev-network:
+    driver: bridge

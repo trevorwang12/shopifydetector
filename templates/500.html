@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>500 - Internal Server Error | Shopify Theme Detector</title>
+    <meta name="description" content="We're experiencing some technical difficulties. Please try again later or contact our support team.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --shopify-green: #00C896;
+            --shopify-dark-green: #108043;
+            --shopify-light-green: #E7F7F4;
+            --shopify-purple: #7B68EE;
+            --shopify-gray: #6B7280;
+            --shopify-light-gray: #F3F4F6;
+            --shopify-dark-gray: #1F2937;
+            --shopify-red: #EF4444;
+            --shopify-light-red: #FEF2F2;
+            --border-radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--shopify-dark-gray);
+            background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--shopify-green);
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 8px;
+            color: var(--shopify-green);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--shopify-gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--shopify-green);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 0;
+        }
+
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+            background: white;
+            padding: 60px 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .error-number {
+            font-size: 120px;
+            font-weight: 700;
+            color: var(--shopify-red);
+            line-height: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--shopify-red), #DC2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .error-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--shopify-dark-gray);
+            margin-bottom: 16px;
+        }
+
+        .error-message {
+            font-size: 18px;
+            color: var(--shopify-gray);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--shopify-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--shopify-dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 200, 150, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--shopify-light-gray);
+            color: var(--shopify-gray);
+            border: 2px solid transparent;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            border-color: var(--shopify-green);
+            color: var(--shopify-green);
+            transform: translateY(-2px);
+        }
+
+        .status-info {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 2px solid var(--shopify-light-gray);
+        }
+
+        .status-info h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--shopify-dark-gray);
+            margin-bottom: 20px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            text-align: left;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: var(--shopify-light-red);
+            border-radius: 8px;
+            border-left: 4px solid var(--shopify-red);
+        }
+
+        .status-item i {
+            color: var(--shopify-red);
+            font-size: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .status-content h4 {
+            color: var(--shopify-dark-gray);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .status-content p {
+            color: var(--shopify-gray);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--shopify-dark-gray);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .error-container {
+                padding: 40px 20px;
+                margin: 0 20px;
+            }
+
+            .error-number {
+                font-size: 80px;
+            }
+
+            .error-title {
+                font-size: 24px;
+            }
+
+            .error-message {
+                font-size: 16px;
+            }
+
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .error-number {
+            animation: pulse 3s infinite;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <i class="fas fa-search"></i>
+                    Shopify Theme Detector
+                </a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/disclaimer">Disclaimer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="error-container">
+                <div class="error-number">500</div>
+                <h1 class="error-title">Internal Server Error</h1>
+                <p class="error-message">
+                    We're experiencing some technical difficulties on our end. Our team has been notified and is working to fix the issue. Please try again in a few minutes.
+                </p>
+
+                <div class="error-actions">
+                    <a href="/" class="btn btn-primary">
+                        <i class="fas fa-home"></i>
+                        Go Back Home
+                    </a>
+                    <a href="javascript:location.reload()" class="btn btn-secondary">
+                        <i class="fas fa-refresh"></i>
+                        Try Again
+                    </a>
+                </div>
+
+                <div class="status-info">
+                    <h3>What can you do?</h3>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="status-content">
+                                <h4>Wait a moment</h4>
+                                <p>The issue might be temporary. Try refreshing the page in a few minutes.</p>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="status-content">
+                                <h4>Contact support</h4>
+                                <p>If the problem persists, please <a href="/contact" style="color: var(--shopify-red); text-decoration: none;">contact our support team</a>.</p>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <i class="fas fa-search"></i>
+                            <div class="status-content">
+                                <h4>Use our main tool</h4>
+                                <p>Our <a href="/" style="color: var(--shopify-red); text-decoration: none;">theme detector</a> should still be working normally.</p>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <i class="fas fa-blog"></i>
+                            <div class="status-content">
+                                <h4>Read our blog</h4>
+                                <p>Check out our <a href="/blog" style="color: var(--shopify-red); text-decoration: none;">blog articles</a> while we fix this issue.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Shopify Theme Detector. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
