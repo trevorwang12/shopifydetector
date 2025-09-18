@@ -1261,4 +1261,4 @@ def inject_seo_helpers():
 if __name__ == '__main__':
     # Use environment variable for debug mode (default: False for production safety)
     debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() in ['true', '1', 'yes']
-    app.run(debug=debug_mode, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    app.run(debug=debug_mode, host='0.0.0.0', port=int(os.environ.get('PORT', 3000)))
