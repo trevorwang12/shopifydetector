@@ -8,10 +8,10 @@ services:
       dockerfile: Dockerfile
     container_name: shopify-theme-detector-app
     ports:
-      - "5000:5000"
+      - "3000:3000"
     environment:
       - FLASK_DEBUG=False
-      - PORT=5000
+      - PORT=3000
       - PYTHONUNBUFFERED=1
     volumes:
       # Mount blog posts for easy content updates
@@ -22,7 +22,7 @@ services:
       - ./logs:/app/logs
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
